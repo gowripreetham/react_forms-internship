@@ -1,7 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+// import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 
 const Forms = () => {
   const [inputs, setInputs] = useState({
@@ -15,9 +18,6 @@ const Forms = () => {
   const [id_, setid_] = useState([]);
 
   const handleChange = (event) => {
-    //console.log(field);
-    // console.log(event.target.value);
-    //const { name, value } = event.target;
     setInputs({
       ...inputs,
       [event.target.name]: event.target.value,
@@ -107,12 +107,10 @@ const Forms = () => {
       return newarr;
     });
   };
-  //   data.filter((user, currentIndex) => currentIndex != indexTodelete)
 
   const [selUserIndex, setselUserIndex] = useState();
 
   const ViewUserData = (user) => {
-    // console.log("909", userData);
     setview([user]);
   };
 
@@ -215,8 +213,19 @@ const Forms = () => {
 
   return (
     <div>
-      <form>
-        <label>
+      <Form>
+        <Form.Group>
+          <Form.Label>Enter your Name :</Form.Label>
+          <Form.Control
+            name="firstname"
+            type="text"
+            placeholder="First Name"
+            value={inputs.firstname}
+            onChange={handleChange}
+          ></Form.Control>
+        </Form.Group>
+
+        {/* <label>
           Enter your Name :<p>{inputs.firstname}</p>
           <input
             name="firstname"
@@ -224,9 +233,20 @@ const Forms = () => {
             value={inputs.firstname}
             onChange={handleChange}
           />
-        </label>
+        </label> */}
         <br></br>
-        <label>
+
+        <Form.Group>
+          <Form.Label>Enter your Phone Number :</Form.Label>
+          <Form.Control
+            name="phnum"
+            type="number"
+            placeholder="Mobile"
+            value={inputs.phnum}
+            onChange={handleChange}
+          ></Form.Control>
+        </Form.Group>
+        {/* <label>
           Enter your Phone Number :
           <input
             name="phnum"
@@ -234,9 +254,20 @@ const Forms = () => {
             value={inputs.phnum}
             onChange={handleChange}
           />
-        </label>
+        </label> */}
+
         <br></br>
-        <label>
+        <Form.Group>
+          <Form.Label>Enter your Date of Birth :</Form.Label>
+          <Form.Control
+            name="dob"
+            type="date"
+            placeholder="Date when you were born."
+            value={inputs.dob}
+            onChange={handleChange}
+          ></Form.Control>
+        </Form.Group>
+        {/* <label>
           Enter your Date of Birth :
           <input
             name="dob"
@@ -244,84 +275,93 @@ const Forms = () => {
             value={inputs.dob}
             onChange={handleChange}
           />
-        </label>
+        </label> */}
         <br></br>
-        <label>
-          Enter your Address :
-          <input
+        <Form.Group>
+          <Form.Label>Enter your Address :</Form.Label>
+          <Form.Control
             name="addr"
             type="text"
+            placeholder="Address"
             value={inputs.addr}
             onChange={handleChange}
-          />
-        </label>
+          ></Form.Control>
+        </Form.Group>
         <br></br>
         <p>Gender?</p>
-        <input
-          type="radio"
-          name="gender"
-          value="Male"
-          onChange={onGenselect}
-          checked={gender === "Male"}
-        />
-        <label>Male</label>
+
+        <Form.Group controlId="gender">
+          <Form.Check
+            value="Male"
+            type="radio"
+            aria-label="radio 1"
+            label="Male"
+            onChange={onGenselect}
+            checked={gender === "Male"}
+          />
+          <Form.Check
+            value="Female"
+            type="radio"
+            aria-label="radio 1"
+            label="Female"
+            onChange={onGenselect}
+            checked={gender === "Female"}
+          />
+          <Form.Check
+            value="Others"
+            type="radio"
+            aria-label="radio 1"
+            label="Others"
+            onChange={onGenselect}
+            checked={gender === "Others"}
+          />
+        </Form.Group>
         <br></br>
-        <input
-          type="radio"
-          name="gender"
-          value="Female"
-          onChange={onGenselect}
-          checked={gender === "Female"}
-        />
-        <label>Female</label>
-        <br></br>
-        <input
-          type="radio"
-          name="gender"
-          value="Others"
-          onChange={onGenselect}
-          checked={gender === "Others"}
-        />
-        <label>Others</label>
-        <p>Select the vehicles you have : </p>
-        <input
-          type="checkbox"
-          onChange={(e) => chkhandleOnChange(e, "car")}
-          checked={checkbox.car == "yes"}
-        />
-        <label> Car</label>
-        {/* <p>{checkbox.car}</p> */}
-        <input
-          type="checkbox"
-          onChange={(e) => chkhandleOnChange(e, "bike")}
-          checked={checkbox.bike == "yes"}
-        />
-        <label> Bike</label>
-        {/* <p>{checkbox.bike}</p> */}
-        <input
-          type="checkbox"
-          onChange={(e) => chkhandleOnChange(e, "auto")}
-          checked={checkbox.auto == "yes"}
-        />
-        <label> Auto</label>
-        {/* <p>{checkbox.auto}</p> */}
-        <br></br>
-        <br></br>
+
+        <Form.Group>
+          <Form.Label>Select the vehicles you have:</Form.Label>
+          <div>
+            <Form.Check
+              type="checkbox"
+              id="car"
+              label="Car"
+              checked={checkbox.car === "yes"}
+              onChange={(e) => chkhandleOnChange(e, "car")}
+            />
+            <Form.Check
+              type="checkbox"
+              id="bike"
+              label="Bike"
+              checked={checkbox.bike === "yes"}
+              onChange={(e) => chkhandleOnChange(e, "bike")}
+            />
+            <Form.Check
+              type="checkbox"
+              id="auto"
+              label="Auto"
+              checked={checkbox.auto === "yes"}
+              onChange={(e) => chkhandleOnChange(e, "auto")}
+            />
+          </div>
+        </Form.Group>
 
         <br></br>
         <br></br>
 
-        <br></br>
-        <br></br>
         {!updateval ? (
-          <input type="submit" onClick={submit} />
+          <Button type="submit" onClick={submit}>
+            Submit
+          </Button>
         ) : (
-          <button onClick={() => updateBtn()}> Update</button>
+          <Button onClick={() => updateBtn()}> Update</Button>
         )}
-      </form>
+      </Form>
+
+      <br></br>
+      <br></br>
 
       {view.length == 0 ? (
-        <table>
+        <Table striped bordered hover>
           <tr>
             <th>User No.</th>
             <th>FirstName</th>
@@ -350,31 +390,30 @@ const Forms = () => {
                 <td>{userData.vehicles.bike ? "Yes" : "No"}</td>
                 <td>{userData.vehicles.auto ? "Yes" : "No"}</td>
                 <td>
-                  <button onClick={() => deleteUserData(index)}>Delete</button>
+                  <Button onClick={() => deleteUserData(index)}>Delete</Button>
                 </td>
                 <td>
-                  <button onClick={() => ViewUserData(userData)}> View</button>
+                  <Button onClick={() => ViewUserData(userData)}> View</Button>
                 </td>
                 <td>
                   {!updateval && (
-                    <button onClick={() => editData(userData)}> Edit</button>
+                    <Button onClick={() => editData(userData)}> Edit</Button>
                   )}
-                  {/* <button onClick={() => editData(userData)}> Edit</button> */}
                   {updateval && (
                     <div>
-                      <button onClick={() => cancelBtn(userData)}>
+                      <Button onClick={() => cancelBtn(userData)}>
                         {" "}
                         Cancel
-                      </button>
+                      </Button>
                     </div>
                   )}
                 </td>
               </tr>
             );
           })}
-        </table>
+        </Table>
       ) : (
-        <table>
+        <Table>
           <tr>
             <th>User No.</th>
             <th>FirstName</th>
@@ -404,7 +443,7 @@ const Forms = () => {
               );
             })}
           x
-        </table>
+        </Table>
       )}
     </div>
   );
